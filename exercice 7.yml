@@ -1,0 +1,22 @@
+
+services:
+  web:
+    image: alpine:0.2
+    volumes:
+      - web_data:/var/www/html
+  web-test:
+    image: alpine:0.2
+    volumes:
+      - web_data:/var/www/html 
+  db:
+    image: mariadb
+    volumes:
+      - db_data:/var/lib/mariadb
+volumes:
+  web_data:
+  db_data:
+    driver: local 
+    driver_opts:
+      type: none
+      device: /data/db_data
+      
