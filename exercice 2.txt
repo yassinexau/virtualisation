@@ -1,0 +1,5 @@
+FROM alpine
+ARG FOLDER=today
+COPY ./${FOLDER} /${FOLDER}
+WORKDIR /${FOLDER}
+CMD lsdocker build . --build-alpine FOLDER=$(date -u +"%Y%m%d")
