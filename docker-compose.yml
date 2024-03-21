@@ -1,0 +1,29 @@
+services:
+  web:
+    image: alpine:0.2
+    container_name: alpine
+    ports:
+      
+      - "8080:80"
+    environment: 
+      - nginx
+      - ./:/var/www/html
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    links:
+      - db:db
+
+  db:
+    image: mariadb:0.2 
+    container_name: projet-virtual
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-data:/var/lib/mariadb
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      
