@@ -1,0 +1,12 @@
+FROM ubuntu:20.04
+
+RUN apt-get update \
+&& apt-get install nginx -y \
+&& apt-get install php-fpm -y
+
+ADD phpinfo.php /var/www/html/
+ADD default /etc/nginx/sites-available/
+
+COPY rdrit-start.sh /opt/
+RUN chmod +x /opt/rdrit-start.sh
+ENTRYPOINT ["/opt/rdrit-start.sh"]
